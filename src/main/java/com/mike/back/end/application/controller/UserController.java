@@ -3,9 +3,9 @@ package com.mike.back.end.application.controller;
 import com.mike.back.end.application.dto.UserDto;
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +44,21 @@ public class UserController {
         users.add(user1);
         users.add(user2);
         users.add(user3);
+    }
+
+    @GetMapping("/users")
+    public List<UserDto> getUsers(){
+        return users;
+    }
+
+    @GetMapping("/users/{cpf}")
+    public UserDto getUserByCpf(@PathVariable(value = "cpf") String cpf){
+        for(UserDto user : users){
+            if(user.getCpf().equals(cpf)){
+                return user;
+            }
+        }
+        return null;
     }
 
     @GetMapping("/")
