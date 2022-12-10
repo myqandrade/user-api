@@ -2,9 +2,8 @@ package com.mike.back.end.application.controller;
 
 import com.mike.back.end.application.dto.UserDto;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.catalina.User;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,5 +63,28 @@ public class UserController {
     @GetMapping("/")
     public String getMessage(){
         return "Spring boot is working!";
+    }
+
+    @PostMapping("/newUser")
+    public UserDto createUser(@RequestBody UserDto userDto){
+        for(UserDto user : users){
+            if(user.getCpf().equals(userDto.getCpf())) {
+                return null;
+            }
+        }
+        userDto.setRegistrationDate(new Date());
+        users.add(userDto);
+        return userDto;
+    }
+
+    @DeleteMapping("/users/{cpf}")
+    public boolean deleteUser(@PathVariable(value="cpf") String cpf){
+        for(UserDto user : users){
+            if(user.getCpf().equals(cpf)){
+                users.remove(user);
+                return true;
+            }
+        }
+        return false;
     }
 }
