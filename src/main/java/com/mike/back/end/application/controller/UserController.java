@@ -2,7 +2,6 @@ package com.mike.back.end.application.controller;
 
 import com.mike.back.end.application.dto.UserDto;
 import jakarta.annotation.PostConstruct;
-import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{cpf}")
-    public UserDto getUserByCpf(@PathVariable(value = "cpf") String cpf){
+    public UserDto getUserByCpf(@PathVariable(value="cpf") String cpf){
         for(UserDto user : users){
             if(user.getCpf().equals(cpf)){
                 return user;
