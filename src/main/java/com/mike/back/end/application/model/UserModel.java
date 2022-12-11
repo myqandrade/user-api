@@ -1,28 +1,29 @@
 package com.mike.back.end.application.model;
 
 import com.mike.back.end.application.dto.UserDto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(name="name")
     private String name;
+    @Column(name="cpf")
     private String cpf;
+    @Column(name="email")
     private String email;
+    @Column(name="address")
     private String address;
+    @Column(name="phone")
     private String phone;
+    @Column(name="registration_date")
     private Date registrationDate;
 
     public static UserModel convert(UserDto userDto){
