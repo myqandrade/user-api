@@ -14,8 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-
+    @Autowired
     private UserRepository userRepository;
+
+    UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     public List<UserDto> getUsers(){
         List<UserModel> users = userRepository.findAll();

@@ -2,12 +2,10 @@ package com.mike.back.end.application.controller;
 
 import com.mike.back.end.application.dto.UserDto;
 import com.mike.back.end.application.service.UserService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,6 +19,11 @@ public class UserController {
     @GetMapping("/users")
     public List<UserDto> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/health")
+    public String getHealth(){
+        return "Application is running";
     }
 
     @GetMapping("/users/{cpf}")
